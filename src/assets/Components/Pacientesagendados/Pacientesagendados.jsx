@@ -11,7 +11,7 @@ const Pacientesagendados= () => {
         // Fetch medical appointments data
         const fetchAppointments = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/api/v1/saludplus/getpatients');
+                const response = await axios.get('https://saludplusweb-production.up.railway.app/api/getpatients');
                 const { data } = response.data;
                 setAppointments(data);
             } catch (error) {
