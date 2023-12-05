@@ -1,5 +1,5 @@
 import axios from 'axios';
-const API_URL = '${import.meta.env.VITE_API_URL}/api/v1/saludplus';
+const API_URL = 'saludplusweb-production.up.railway.app';
 
 export const login = async (formData) => {
 try {
