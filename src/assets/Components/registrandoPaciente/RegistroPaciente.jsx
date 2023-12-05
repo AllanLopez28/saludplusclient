@@ -33,7 +33,7 @@ function RegistroPaciente() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/api/v1/saludplus/patients', formState);
+      const response = await axios.post('https://saludplusweb-production.up.railway.app/api/saludplus/patients', formState);
       console.log(response.data);
       setFormState({
         Dui: '',
