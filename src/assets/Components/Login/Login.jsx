@@ -1,11 +1,13 @@
+// Login.jsx
+
 import React from "react";
 import Rectangle from "../../../public/ingresarDoc_Rectangle6.png";
 import Logo from "../../../public/fechasDelPaciente_LOGO_SALUD_PLUSremovebgpreview1.png";
 import Logo2 from "../../../public/LOGO_SALUD_PLUS-removebg-preview 2.png";
 import { useNavigate } from "react-router-dom";
-import { login } from "../../Services/saludPlusConsume";
+import axios from 'axios';  // Importa axios aquí
 import { useState } from "react";
-import MenuDoc from "../MenuDoc/MenuDoc"; 
+import MenuDoc from "../MenuDoc/MenuDoc";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -18,13 +20,17 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const result = await login(formData);
+      const response = await axios.post("https://saludplusweb-production.up.railway.app/api/login", formData, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
 
       // Maneja la respuesta según tus necesidades
-      console.log("Resultado del login:", result);
+      console.log("Resultado del login:", response.data);
 
       // Almacena la información del usuario si el inicio de sesión es exitoso
-      setUser(result); // Reemplaza con la estructura real de tu usuario
+      setUser(response.data); // Reemplaza con la estructura real de tu usuario
       setIsLoggedIn(true);
 
       // Navega al usuario a la página deseada
@@ -98,20 +104,19 @@ export default function Login() {
                   </svg>
                 </div>
 
-                  <button 
-                  type= "submit"
-                  className="bg-[#0071AB] rounded-lg text-white py-4 px-6 hover:scale-105 duration-300">
-                    Login
-                  </button>
+                <button
+                  type="submit"
+                  className="bg-[#0071AB] rounded-lg text-white py-4 px-6 hover:scale-105 duration-300"
+                >
+                  Login
+                </button>
               </form>
             </div>
-            <div className="flex-1 hidden md:block flex justify-center items-center"> {/* Oculta en dispositivos móviles */}
+            <div className="flex-1 hidden md:block flex justify-center items-center">
+              {/* Oculta en dispositivos móviles */}
               <div className="absolute right-4 top-1/2 transform -translate-y-1/2 ">
                 <picture>
-                  <source
-                    media="(min-width: 640px)"
-                    srcSet={Logo2}
-                  />
+                  <source media="(min-width: 640px)" srcSet={Logo2} />
                   <img
                     src={Logo2}
                     alt="Logo SALUD PLUS"
