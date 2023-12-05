@@ -35,7 +35,7 @@ export default function NuevaCita() {
     if (selectedDate && symptoms && phone && name) {
       try {
         const response = await axios.post(
-          "http://localhost:3001/api/v1/saludplus/medicalAppointments",
+          "https://saludplusweb-production.up.railway.app/medicalAppointments",
           {
             dateOfAppointment: selectedDate,
             symptoms,
